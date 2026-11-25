@@ -1,0 +1,10 @@
+{
+  "name": "fairswitch",
+  "private": true,
+  "type": "module",
+  "workspaces": ["packages/*", "circuit"],
+  "scripts": {
+    "test": "npm test -w @fairswitch/evaluator && npm test -w @fairswitch/circuit",
+    "build:circuit": "npm run build -w @fairswitch/circuit"
+  }
+}

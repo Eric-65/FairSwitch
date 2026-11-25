@@ -1,0 +1,16 @@
+{
+  "name": "@fairswitch/circuit",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.js",
+    "test": "node --test test/*.test.js",
+    "verify:live": "node scripts/verify-live.js",
+    "plan:tapeout": "node scripts/plan-tapeout.js"
+  },
+  "dependencies": {
+    "@fairswitch/evaluator": "*",
+    "viem": "2.21.54"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "@fairswitch/evaluator",
+  "version": "0.1.0",
+  "description": "TAP-02 netlist decoder + one-beat evaluator + keccak256. Zero dependencies, portable to C++.",
+  "type": "module",
+  "main": "src/index.js",
+  "exports": {
+    ".": "./src/index.js"
+  },
+  "license": "MIT",
+  "scripts": {
+    "test": "node --test test/*.test.js"
+  },
+  "devDependencies": {
+    "@noble/hashes": "1.5.0"
+  }
+}
