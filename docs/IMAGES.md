@@ -2,6 +2,27 @@
 
 Drop the finished files into `web/public/img/`. For each slot, export a master at the listed size; the build will generate AVIF/WebP variants at 640/1080/1600/2400 px wide. Until a file exists, the UI shows a CSS gradient + SVG silhouette placeholder (never a broken image).
 
+## What the site actually uses (make these first)
+
+Save each as a high-quality **JPG**, named exactly as below, into `web/public/img/`. The site converts them to AVIF/WebP itself, so you don't need to.
+
+| Priority | File | Where it shows | Size |
+|---|---|---|---|
+| 1 | `collage-solar.jpg` | Collage card "Solar Home Kit" | 1600×2000 (4:5) |
+| 1 | `collage-freezer.jpg` | Collage card "Chest Freezer" | 1600×1600 (1:1) |
+| 1 | `collage-battery.jpg` | Collage card "E-bike Battery" | 1500×2000 (3:4) |
+| 1 | `collage-laundry.jpg` | Collage card "Laundry Machine" | 1600×2000 (4:5) |
+| 1 | `collage-esp32.jpg` | Collage card "ESP32 + Relay" | 2000×1333 (3:2) |
+| 1 | `panel-solar.jpg` | Full-screen panel "Solar Home Kits" | 1440×2560 (9:16) |
+| 1 | `panel-freezer.jpg` | Full-screen panel "Shared Freezers" | 1440×2560 (9:16) |
+| 1 | `panel-ebike.jpg` | Full-screen panel "E-bike Batteries" | 1440×2560 (9:16) |
+| 1 | `operator-card.jpg` | "Operator Plan" card in hand | 1600×2000 (4:5) |
+| 2 | `og-image.jpg` | Link preview when the site is shared | 1200×630 |
+
+**No words in the images.** The captions ("E-BIKE BATTERY" and so on) are drawn by the site on top of the photo. For the operator card, a blank card is safest, since AI image tools often garble text.
+
+The other rows below (hero fallback, bulb, device studio, phone, closing) are **optional**: those spots are drawn in code right now.
+
 **House style (append to every prompt):** editorial high-fashion product photography, shallow depth of field, clean negative space, no text, no logos, no people's faces, no brand marks, photorealistic, 50–85mm lens look, subtle film grain.
 
 **Palettes:** *Aqua*: cyan/teal haze (#12B3D6 → #2EC9C4), soft smoke or liquid textures. *Studio black*: pure black backdrop (#0B0B0C), dramatic rim light, one orange-red accent light (#FF4A0A) at most. *Bright neutral*: off-white seamless (#F3F4F5), soft daylight.
