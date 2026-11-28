@@ -2,18 +2,16 @@
 
 What was checked, how, and what is still open. Anything not listed as **verified** here must not be stated as fact on the site.
 
-_Last updated: 2026-11-25._
+_Last updated: 2026-11-28 (live reads at X Layer block ≈77,103,959)._
 
-## Environment note
-
-The build container for this milestone **cannot reach X Layer RPC** (`rpc.xlayer.tech` and `xlayerrpc.okx.com` are blocked by its network policy) or OKLink. All on-chain checks below that need a live read are therefore **pending** and are scripted so you can run them:
+## How to re-run
 
 ```bash
-node circuit/scripts/verify-live.js                       # decoder vs live eval() on real X Layer circuits
-XLAYER_RPC=https://rpc.xlayer.tech forge test --root contracts --match-contract Fork -vv
+NODE_USE_ENV_PROXY=1 node circuit/scripts/verify-live.js      # NODE_USE_ENV_PROXY only behind an HTTPS proxy
+cd contracts && XLAYER_RPC=https://rpc.xlayer.tech forge test --match-contract Fork -vv
 ```
 
-`verify-live.js` writes its results to `docs/verification/live-*.json`. Commit that file once it passes.
+Live reports are committed under `docs/verification/`.
 
 ## 1. TAP-02 spec
 
@@ -46,22 +44,30 @@ XLAYER_RPC=https://rpc.xlayer.tech forge test --root contracts --match-contract 
 - **keccak256(netlist) = `0xd0b1c483d80c233f7b4988ae5cc8029d5b6708610e2b829cbcfbf31248b9b1eb`**
 - Exhaustive: 64/64 inputs equal the reference formulas (both through `beat` and through the packed `eval` path).
 - Never-relock: 32/32 with OWNED_PREV=1 → RELAY_ON=1; every row with OWNED=1 has RELAY_ON=1; 2,000-step random device simulation with set-only stored OWNED never relocks.
+- **Mainnet-fork rehearsal (real TapeOut implementation, nothing broadcast):** `contracts/test/ForkTapeout.t.sol` creates a processor, mints 19 NAND, tapes out our netlist and gets `circuitInfo` = (6, 3, 0, 19) with the netlist stored byte-exact. **All 64 inputs through the real on-chain `eval()` equal the formulas.** `ForkPathB.t.sol` does the same on the existing OrderGuard processor.
 - The same bytes run inside the Solidity `MockProcessor` in the contract tests, and `status()` is fuzz-checked against the formulas (512 runs).
 
-## 4. Addresses and fees (X Layer, 196)
+## 4. Addresses and fees (X Layer, 196), read 2026-11-28
 
 | Item | Value | Status |
 |---|---|---|
-| Processor factory | `0x1f09DAeFA827f02CBb40967cc91b259763760761` | from TAP-10 *Deployments* (read by its authors 2026-09-27). Not re-read by us. **TODO: verify** |
-| Factory sealed? | No, per TAP-10 at that time. Processors are beacon proxies, so circuits are **upgradeable by the factory owner** | from TAP-10. Supports our "pinned and verifiable, not immutable" wording |
-| USDT0 | `0x779Ded0c9e1022225f8E0630b35a9b54bE713736`, 6 decimals | **TODO: verify** on OKLink. The fork test asserts code exists and `decimals()==6` |
-| `createCPU(string,string,string,uint256,uint256)`, `deployFee()` | from `xm1319/tapemkt` | **TODO: verify** |
-| Transistor `mint(uint256 id, uint256 amount)`, id 0 = NAND | from `xm1319/tapemkt` | **TODO: verify** |
-| Fees: deploy 0.0066 OKB, tape-out 0.0013 OKB, NAND 0.0001 OKB each, protocol 0.00066 OKB per mint | measured by `xm1319/tapemkt` (2026-10) | **TODO: verify**. `plan-tapeout.js` reads them live when RPC is reachable |
-| Estimated total for our circuit (own processor) | ≈ 0.0105 OKB + gas | estimate from the unverified figures above |
+| Processor factory (UUPS proxy) | `0x1f09DAeFA827f02CBb40967cc91b259763760761` | **verified** live (`isCPU`, `cpuCount` = 458) |
+| Factory implementation (ERC-1967 slot) | `0x336e9F0F4c3fEe7C8c803377e4DEA00293f4ae2a` | **verified** live. **Differs from TAP-10** (`0x7495…d17b`): the factory has been upgraded since TAP-10 was written |
+| Factory owner / sealed | owner `0xB3D85b42A045c1A88D800CAD0F55d2566a4D3138`, `isSealed()` = false | **verified** live. Circuits are upgradeable, so we say "pinned and verifiable", never "immutable" |
+| USDT0 | `0x779Ded0c9e1022225f8E0630b35a9b54bE713736`, name/symbol "USD₮0", 6 decimals | **verified** live + OKLink (listed as USD₮0 / Tether USD) |
+| `createCPU(string,string,string,uint256,uint256)` | selector `0x47f9b5fd`, **now non-payable** | **verified** on fork |
+| Deploy fee | `deployFee()` = 10,000,000 base units of **BEM** (`0x60e62Efa9405d6873C5deaBD4E6CC91c25363952`, 8 decimals) = **0.1 BEM**, pulled with `transferFrom` | **verified** on fork. Earlier reports of "0.0066 OKB" are out of date |
+| Max transistor price on a new processor | 1e12 (getter `0x8efc9196`; "price too high" above it) | **verified** live |
+| New processor's transistors | `mint(0, n)`, paid in BEM: n × our mintPrice + protocolFee (0.01 BEM) | **verified** on fork |
+| Existing processor (OrderGuard) transistors | payable in OKB: mintPrice 0.0001 OKB, protocolFee 0.00066 OKB | **verified** on fork |
+| `TAPEOUT_FEE` | 0.0013 OKB (native, exact `msg.value`) | **verified** live |
+| **Cost: option A, own processor** | 0.3 BEM (0.1 deploy + 0.19 transistors that go to us as owner + 0.01 protocol) + 0.0013 OKB + gas | from fork rehearsal |
+| **Cost: option B, existing processor (OrderGuard)** | 0.00386 OKB + gas | from fork rehearsal |
+| What BEM is and where to get it | unknown | **TODO**: not researched. Don't use option A until we know |
 
 ## 5. Conflicts found between sources
 
 1. **Output buffering.** `xm1319/tapemkt` NETLIST-FORMAT.md says the contract appends 2 buffer NANDs per output at tape-out. TAP-02 (§4, §6, verified source) says outputs are simply the last nOut signals and `tapeout` burns exactly the top-level gate count. **We follow TAP-02.** Our circuit is unaffected either way: identity buffers don't change values, and `verify-live.js` will show which is true.
 2. **Is TAP-02 available?** `Tajudeeen/netlist` comments say it was removed. It is present in `TapeOutProtocol/TAPs` as of today.
-3. **Tape-out fee.** TAP-02 cites 0.0002 BNB on BSC. On X Layer the reported value is 0.0013 OKB. Different chains, so this is not a contradiction, but read `TAPEOUT_FEE` live before sending (`msg.value` must match exactly).
+3. **Factory upgraded.** TAP-10 lists implementation `0x7495…d17b`. The live slot is `0x336e…ae2a`, and fees moved from OKB to the BEM token. This is exactly the upgradeability TAP-10 warns about, and it's why devices pin the netlist hash.
+4. **Tape-out fee.** TAP-02 cites 0.0002 BNB on BSC. On X Layer it is 0.0013 OKB (verified). Read `TAPEOUT_FEE` live before sending (`msg.value` must match exactly).

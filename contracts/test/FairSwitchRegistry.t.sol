@@ -251,7 +251,7 @@ contract FairSwitchRegistryTest is Test {
 
     /// Never-relock: once owned, the relay is on at any later time.
     function testFuzz_neverRelock(uint64 amount, uint32 laterA, uint32 laterB) public {
-        _pay(1 + (amount % PRICE));
+        _pay(1 + (amount % (PRICE - 1))); // strictly below the price
         _pay(PRICE); // finishes it (excess not taken)
         vm.warp(block.timestamp + laterA);
         (bool o, bool r,) = _status();

@@ -10,9 +10,9 @@ Built for the OKX **X Layer TapeOut Accelerate** hackathon. The lockout rule is 
 |---|---|
 | `packages/evaluator`: TAP-02 decoder, evaluator, keccak256 (zero deps) | ✅ passes all official TAP-02 vectors |
 | `circuit`: 19-NAND lockout netlist, exhaustive 64-case + never-relock tests | ✅ |
-| `circuit/scripts/verify-live.js`: decoder vs live X Layer `eval()` | ⏳ written; needs a machine with X Layer RPC access |
+| `circuit/scripts/verify-live.js`: decoder vs live X Layer `eval()` | ✅ 16/16 on 3 real circuits |
 | `circuit/scripts/plan-tapeout.js`: prints calldata + cost, never broadcasts | ✅ |
-| `contracts`: `FairSwitchRegistry` + tests + fork tests | ✅ unit/fuzz, ⏳ fork |
+| `contracts`: `FairSwitchRegistry` + tests + fork tests | ✅ unit/fuzz + mainnet-fork rehearsal of the full tape-out (64/64 on real `eval`) |
 | `web`: React + Vite app | ⏳ waiting for the design reference |
 | `firmware` | later |
 
@@ -23,7 +23,7 @@ npm install
 npm test                         # evaluator + circuit tests
 npm run build:circuit            # regenerate circuit/build/lockout.json
 node circuit/scripts/plan-tapeout.js [--processor 0x..] [--from 0x..]
-node circuit/scripts/verify-live.js
+NODE_USE_ENV_PROXY=1 node circuit/scripts/verify-live.js   # env var only needed behind an HTTPS proxy
 cd contracts && forge test
 ```
 

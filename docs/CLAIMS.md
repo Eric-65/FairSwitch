@@ -7,7 +7,7 @@ Every sentence the site or submission states as fact must have a row here. Statu
 | "Inputs proven: 64/64" | `circuit/test/lockout.test.js` exhaustive test | ✅ |
 | "Relocks after payoff: 0" | Never-relock tests (circuit + `testFuzz_neverRelock`). State it as "0 in 64/64 cases plus fuzzing", not as an observation of real devices | ✅ (worded as tested) |
 | "The rule is a public circuit on X Layer" | Needs processor address + circuit id after tape-out | ⏳ |
-| "Your device checks the same circuit" | Netlist hash pinned. `verify-live.js` shows decoder == on-chain eval | ⏳ live run |
+| "Your device checks the same circuit" | Netlist hash pinned. Our decoder == on-chain eval (16/16 live, 64/64 on fork for our circuit) | ✅ |
 | "Payments go straight to the operator" | `pay()` transfers payer→operator. `test_active_afterPayment` asserts the registry balance stays 0 | ✅ |
 | "Overpayments are never taken" | `test_overpay_onlyRemainingIsTaken` | ✅ |
 | "Terms can't be changed after registration" | No setter in `FairSwitchRegistry` | ✅ |

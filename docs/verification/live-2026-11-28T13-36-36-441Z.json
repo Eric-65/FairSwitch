@@ -1,0 +1,49 @@
+{
+  "chainId": 196,
+  "block": "77103959",
+  "at": "2026-11-28T13:36:36.441Z",
+  "circuits": [
+    {
+      "processor": "0x57F319CF056F72F48cF1dbb670F2A3DB007Aa355",
+      "id": "3",
+      "nIn": 3,
+      "nOut": 1,
+      "nState": 0,
+      "gateCount": 12,
+      "netlistHash": "0x6bcad8066e6b702f3b790260c5a17ec487f7f3144024588a25d31e17fb9fde45",
+      "bytes": 84,
+      "gateCountMatches": true,
+      "tested": 8,
+      "match": 8,
+      "mismatches": []
+    },
+    {
+      "processor": "0x57F319CF056F72F48cF1dbb670F2A3DB007Aa355",
+      "id": "4",
+      "nIn": 2,
+      "nOut": 2,
+      "nState": 0,
+      "gateCount": 5,
+      "netlistHash": "0xfffa29f1e30fa6438ba0e6ebd40ef157b53d0eff3f21cc4bc46942e27cb32ca0",
+      "bytes": 35,
+      "gateCountMatches": true,
+      "tested": 4,
+      "match": 4,
+      "mismatches": []
+    },
+    {
+      "processor": "0x839bdD6fa7A66416A609A735e11DE5411B98574e",
+      "id": "1",
+      "nIn": 2,
+      "nOut": 1,
+      "nState": 0,
+      "gateCount": 4,
+      "netlistHash": "0x564b93679937b8cbafd5ae8fd11f7caf200606f267f1cdb37a38f95e361b2a0f",
+      "bytes": 28,
+      "gateCountMatches": true,
+      "tested": 4,
+      "match": 4,
+      "mismatches": []
+    }
+  ]
+}
