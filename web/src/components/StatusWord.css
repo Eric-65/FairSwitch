@@ -1,0 +1,25 @@
+@layer components {
+  .status { display: flex; flex-wrap: wrap; align-items: baseline; column-gap: 0.25em; line-height: 0.9; view-transition-name: status-word; }
+  .status--xl { font-size: clamp(4rem, 22vw, 12rem); }
+  .status--md { font-size: clamp(2.5rem, 12vw, 5rem); }
+  .status__word { font-weight: 800; letter-spacing: -0.06em; }
+  .status__accent { font-size: 0.42em; letter-spacing: -0.02em; color: var(--c-slate-1); }
+  .status--dark .status__accent { color: var(--c-slate-2); }
+  .status__ring { align-self: center; }
+
+  .status--on .status__word { color: var(--c-signal); text-shadow: 0 0 0.35em rgb(255 74 10 / 0.45); }
+  .status--light.status--on .status__word, .status--light.status--owned .status__word { color: #d93a00; text-shadow: 0 0 0.3em rgb(255 74 10 / 0.18); }
+  .status--grace .status__word { color: var(--c-aqua-deep); animation: pulse 2.4s var(--ease-in-out) infinite; }
+  .status--dark.status--grace .status__word { color: var(--c-aqua-1); }
+  .status--locked .status__word { color: var(--c-slate-1); }
+  .status--dark.status--locked .status__word { color: var(--c-slate-2); }
+  .status--refused .status__word { color: var(--c-alert); }
+  .status--owned .status__word { color: var(--c-signal); }
+  .status--owned .status__accent {
+    color: var(--c-ink); padding: 0 0.15em;
+    background: linear-gradient(transparent 58%, var(--c-volt) 58%, var(--c-volt) 92%, transparent 92%);
+  }
+  .status--dark.status--owned .status__accent { color: var(--c-white); background: linear-gradient(transparent 62%, rgb(232 255 26 / 0.55) 62%, rgb(232 255 26 / 0.55) 92%, transparent 92%); }
+  .status--off .status__word { color: var(--c-slate-2); }
+  @media (prefers-reduced-motion: reduce) { .status--grace .status__word { animation: none; } }
+}

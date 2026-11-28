@@ -1,0 +1,49 @@
+@layer components {
+  .circuit { display: grid; gap: var(--s-6); }
+  .circuit__svg {
+    width: 100%; min-width: 44rem; height: auto; overflow: visible;
+    font-family: var(--font-sans); font-size: 11px;
+  }
+  .circuit { min-width: 0; }
+  .circuit__scroll { overflow-x: auto; overscroll-behavior-x: contain; }
+  .circuit__scroll:focus-visible { outline-offset: 4px; }
+
+  .w { fill: none; stroke: #3a3b3f; stroke-width: 1.5; transition: stroke var(--d-2); }
+  .w.is-hi {
+    stroke: var(--c-aqua-1); stroke-width: 2; filter: url(#glow);
+    stroke-dasharray: 6 10; animation: flow 0.9s linear infinite;
+  }
+  .w.is-relay { stroke: var(--c-signal); stroke-width: 2.5; filter: url(#glow); stroke-dasharray: 6 10; animation: flow 0.7s linear infinite; }
+  @keyframes flow { to { stroke-dashoffset: -16; } }
+
+  .gate path { fill: var(--c-graphite-1); stroke: #4a4b50; stroke-width: 1.5; transition: stroke var(--d-2); }
+  .gate circle { fill: var(--c-ink); stroke: #4a4b50; stroke-width: 1.5; }
+  .gate.is-hi path, .gate.is-hi circle { stroke: var(--c-aqua-1); }
+  .gate text { fill: var(--c-slate-1); font-size: 9px; }
+
+  .pin circle { fill: var(--c-graphite-2); stroke: #4a4b50; stroke-width: 1.5; }
+  .pin.is-hi circle { fill: var(--c-aqua-1); stroke: var(--c-aqua-2); filter: url(#glow); }
+  .pin.is-relay circle { fill: var(--c-signal); stroke: var(--c-signal); filter: url(#glow); }
+  .pin__label { fill: var(--c-slate-2); font-weight: 600; letter-spacing: 0.04em; }
+  .pin.is-hi .pin__label { fill: var(--c-white); }
+  .pin.is-relay .pin__label { fill: var(--c-signal); }
+
+  .circuit__toggles {
+    border: 0; padding: 0; min-width: 0; display: grid; gap: var(--s-2);
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 13rem), 1fr));
+  }
+  .circuit__toggles legend { color: var(--c-slate-2); margin-bottom: var(--s-3); }
+  .toggle {
+    position: relative; display: flex; align-items: center; gap: var(--s-3); min-height: 48px;
+    padding: 0.6em 0.9em; border: 1px solid var(--c-line-dark); cursor: pointer;
+    font-weight: 600; font-size: 0.9rem; color: var(--c-slate-2);
+    transition: border-color var(--d-2), color var(--d-2);
+  }
+  .toggle input { position: absolute; opacity: 0; inset: 0; cursor: pointer; }
+  .toggle:has(input:focus-visible) { outline: 2px solid var(--c-signal); outline-offset: 2px; }
+  .toggle__dot { width: 14px; height: 14px; border-radius: 50%; border: 2px solid var(--c-slate-1); flex: none; }
+  .toggle.is-on { border-color: var(--c-aqua-1); color: var(--c-white); }
+  .toggle.is-on .toggle__dot { background: var(--c-aqua-1); border-color: var(--c-aqua-1); box-shadow: 0 0 10px var(--c-aqua-1); }
+
+  @media (prefers-reduced-motion: reduce) { .w.is-hi, .w.is-relay { animation: none; stroke-dasharray: none; } }
+}

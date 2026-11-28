@@ -1,0 +1,28 @@
+@layer components {
+  .op { background: var(--c-mist); min-height: 100svh; }
+  .op__head { background: var(--c-signal); color: var(--c-white); padding: clamp(7rem, 28vw, 11rem) 0 var(--s-8); }
+  .op__head .site-header { color: var(--c-white); }
+  .op__kicker { font-size: 1.5rem; font-weight: 500; text-transform: lowercase; }
+  .op__head .wallet__hint { color: var(--c-ink); }
+  .op__title { font-size: var(--fs-h1); margin: var(--s-3) 0 var(--s-4); }
+  .op__sub { font-size: max(1.5rem, var(--fs-label)); font-weight: 500; letter-spacing: -0.03em; line-height: 1.15; max-width: 24ch; margin-bottom: var(--s-6); }
+  .op__body { padding-block: var(--s-8) var(--section-y); }
+  .op__banner { color: var(--c-graphite-2); margin-bottom: var(--s-7); }
+  .op__section + .op__section { margin-top: var(--section-y); }
+  .op__h2 { font-size: var(--fs-h2); display: flex; gap: 0.3em; align-items: center; margin-bottom: var(--s-6); }
+  .op__h2 .ring { width: 0.6em; height: 0.6em; }
+  .op__form { display: grid; gap: var(--s-5); max-width: 40rem; }
+  @media (min-width: 48rem) { .op__form { grid-template-columns: 1fr 1fr; } .op__form .field:first-child, .op__fixed, .op__form .btn { grid-column: 1 / -1; } }
+  .op__form .btn { justify-self: start; }
+  .op__fixed { color: var(--c-slate-1); }
+  .op__rows { border-top: 1px solid var(--c-fog); }
+  .op__row { display: flex; justify-content: space-between; align-items: center; gap: var(--s-4); padding-block: var(--s-5); border-bottom: 1px solid var(--c-fog); }
+  .op__row .pixel { font-size: 1.5rem; }
+  .op__row:hover .pixel { translate: 0.3em 0; }
+  .op__row-main { display: grid; gap: 0.2em; font-size: var(--fs-label); font-weight: 600; }
+  .op__row-terms { color: var(--c-slate-1); font-size: 0.9rem; font-weight: 400; }
+  .op__table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+  .op__table th { text-align: left; font-size: var(--fs-micro); text-transform: uppercase; letter-spacing: 0.08em; color: var(--c-slate-1); padding-bottom: var(--s-2); }
+  .op__table td { padding: var(--s-3) var(--s-2) var(--s-3) 0; border-top: 1px solid var(--c-fog); }
+  .op__table a { text-decoration: underline; text-decoration-color: var(--c-signal-ink); }
+}

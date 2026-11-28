@@ -1,0 +1,14 @@
+@layer components {
+  .wallet { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-3); }
+  .wallet__btn {
+    min-height: 44px; padding: 0.7em 1.2em; border-radius: var(--r-pill);
+    background: var(--c-ink); color: var(--c-white); font-weight: 600;
+  }
+  .wallet--dark .wallet__btn { background: var(--c-white); color: var(--c-ink); }
+  .wallet__btn--warn { background: var(--c-signal) !important; color: var(--c-ink) !important; }
+  .wallet__btn--ghost { background: transparent !important; color: inherit !important; border: 1px solid currentColor; }
+  .wallet__btn:disabled { opacity: 0.6; }
+  .wallet__addr { display: inline-flex; align-items: center; gap: 0.5em; font-family: var(--font-mono); font-size: 0.9em; }
+  .wallet__hint { width: 100%; font-size: 0.85em; color: var(--c-slate-1); }
+  .wallet--dark .wallet__hint { color: var(--c-slate-2); }
+}

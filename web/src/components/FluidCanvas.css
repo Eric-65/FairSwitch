@@ -1,0 +1,23 @@
+@layer components {
+  .fluid { position: absolute; inset: 0; overflow: hidden; background: var(--c-aqua-deep); }
+  .fluid__canvas { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 1.2s var(--ease-out); }
+  .fluid__canvas.is-ready { opacity: 1; }
+  /* CSS fallback: @property-animated gradients + blur */
+  .fluid__fallback {
+    position: absolute; inset: -10%; opacity: 1; filter: blur(40px); animation-play-state: paused;
+    background:
+      radial-gradient(40% 35% at var(--fluid-x) var(--fluid-y), #b9eef0 0%, transparent 70%),
+      conic-gradient(from var(--fluid-a) at 60% 55%, #076f97, #12b3d6, #2ec9c4, #0a7fa8, #076f97);
+    animation: fluid-move 18s var(--ease-in-out) infinite alternate;
+  }
+  .fluid--collage .fluid__fallback {
+    background:
+      radial-gradient(40% 35% at var(--fluid-x) var(--fluid-y), #f1efe6 0%, transparent 70%),
+      conic-gradient(from var(--fluid-a) at 50% 50%, #0f9aa8, #2ec9c4, #f3c9a6, #f1efe6, #0f9aa8);
+  }
+  .fluid__fallback.is-on { animation-play-state: running; }
+  @keyframes fluid-move {
+    to { --fluid-a: 300deg; --fluid-x: 70%; --fluid-y: 65%; }
+  }
+  @media (prefers-reduced-motion: reduce) { .fluid__fallback { animation: none; } }
+}

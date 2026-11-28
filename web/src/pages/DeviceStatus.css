@@ -1,0 +1,24 @@
+@layer components {
+  .ds { background: var(--c-mist); padding: clamp(6.5rem, 26vw, 10rem) 0 var(--section-y); min-height: 100svh; }
+  .ds__label { display: flex; flex-wrap: wrap; gap: var(--s-3); align-items: center; font-size: var(--fs-label); font-weight: 500; margin-bottom: var(--s-4); }
+  .ds__label .tag { color: var(--c-signal-ink); }
+  .ds__loading { color: var(--c-slate-1); }
+  .ds__meters { display: grid; gap: var(--s-5); margin-top: var(--s-7); border-top: 1px solid var(--c-fog); padding-top: var(--s-5); }
+  @media (min-width: 48rem) { .ds__meters { grid-template-columns: 1fr 1fr; } }
+  .ds__meter .micro { color: var(--c-slate-1); margin-bottom: var(--s-2); }
+  .ds__big { font-size: clamp(2rem, 8vw, 3.5rem); font-weight: 300; letter-spacing: -0.05em; line-height: 1; margin-bottom: var(--s-3); }
+  .ds__big span { font-size: 0.45em; color: var(--c-slate-1); letter-spacing: -0.02em; }
+  .ds__time { margin-top: var(--s-5); max-width: 32rem; }
+  .ds__rule, .ds__verify { margin-top: var(--section-y); }
+  .ds__h2 { font-size: var(--fs-h2); display: flex; gap: 0.3em; align-items: center; margin-bottom: var(--s-7); }
+  .ds__h2 .ring { width: 0.6em; height: 0.6em; }
+  .ds__verify .ds__h2 { margin-bottom: var(--s-4); }
+  .ds__p { color: var(--c-slate-1); max-width: 48ch; margin-bottom: var(--s-5); font-size: var(--fs-label); letter-spacing: -0.02em; line-height: 1.3; }
+  .ds__wallet { margin-top: var(--s-8); }
+
+  .sheet { position: fixed; inset: 0; z-index: 80; background: rgb(11 11 12 / 0.5); display: grid; align-items: end; }
+  @media (min-width: 48rem) { .sheet { place-items: center; } }
+  .sheet__panel { background: var(--c-white); padding: var(--s-6) var(--gutter) max(var(--s-6), env(safe-area-inset-bottom)); display: grid; gap: var(--s-5); width: 100%; max-width: 32rem; }
+  .sheet__title { font-size: var(--fs-h2); }
+  .sheet__btns { display: flex; gap: var(--s-3); justify-content: flex-end; }
+}

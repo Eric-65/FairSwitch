@@ -1,0 +1,42 @@
+@layer utilities {
+  /* line-by-line reveal (scroll-driven, JS fallback adds .is-in) */
+  .reveal-line { display: block; overflow: clip; padding-bottom: 0.08em; }
+  .reveal-line > span { display: inline-block; }
+
+  @supports (animation-timeline: view()) {
+    .reveal-line > span {
+      animation: rise linear both;
+      animation-timeline: view();
+      animation-range: entry 5% entry 60%;
+    }
+    .stmt-word {
+      animation: ink linear both;
+      animation-timeline: view();
+      animation-range: cover 15% cover 45%;
+    }
+    .parallax {
+      animation: drift linear both;
+      animation-timeline: view();
+      animation-range: cover 0% cover 100%;
+    }
+  }
+  @supports not (animation-timeline: view()) {
+    .reveal-line > span { opacity: 0; transform: translateY(0.6em); transition: opacity var(--d-4) var(--ease-out), transform var(--d-4) var(--ease-out); }
+    .is-in .reveal-line > span { opacity: 1; transform: none; }
+    .stmt-word { transition: color var(--d-3) var(--ease-out); }
+  }
+
+  @keyframes rise { from { opacity: 0; transform: translateY(0.6em); } to { opacity: 1; transform: none; } }
+  @keyframes ink { from { color: var(--c-slate-1); } to { color: var(--c-ink); } }
+  @keyframes drift { from { translate: 0 calc(var(--speed, 0) * 1%); } to { translate: 0 calc(var(--speed, 0) * -1%); } }
+  @keyframes pulse { 50% { opacity: 0.65; } }
+  @keyframes marquee { to { transform: translateX(-50%); } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .parallax { animation: none !important; translate: none !important; }
+    .reveal-line > span { animation: fade linear both !important; animation-timeline: view() !important; transform: none !important; }
+    .stmt-word { animation: none !important; color: var(--c-ink) !important; }
+    *, *::before, *::after { scroll-behavior: auto !important; }
+    @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+  }
+}

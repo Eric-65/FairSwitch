@@ -1,0 +1,78 @@
+@layer components {
+  .vd { background: var(--c-ink); color: var(--c-white); padding: clamp(6.5rem, 26vw, 10rem) 0 var(--section-y); min-height: 100svh; }
+  .vd__label { display: flex; flex-wrap: wrap; gap: var(--s-3); align-items: center; color: var(--c-slate-2); }
+  .vd__label .tag { color: var(--c-volt); }
+  .vd__title { font-size: var(--fs-h1); margin: var(--s-4) 0 var(--s-7); max-width: 14ch; }
+  .vd__title .serif { font-weight: 400; }
+
+  .vd__grid { display: grid; gap: var(--s-7); container-type: inline-size; }
+  @media (min-width: 64rem) { .vd__grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; } .vd__card { position: sticky; top: 6rem; } }
+
+  .vd__card { display: grid; gap: var(--s-5); }
+  .vd__studio {
+    position: relative; aspect-ratio: 4 / 5; overflow: clip; display: grid; place-items: center;
+    background:
+      radial-gradient(55% 40% at 50% 85%, rgb(255 255 255 / 0.07), transparent 70%),
+      radial-gradient(60% 50% at 50% 40%, #1b1c1e, #0b0b0c 75%);
+    border: 1px solid #1f2023;
+  }
+  .vd__studio::after { content: ''; position: absolute; left: 15%; right: 15%; bottom: 12%; height: 6%; border-radius: 50%; background: rgb(0 0 0 / 0.6); filter: blur(12px); }
+
+  .bulb { width: 52%; position: relative; z-index: 1; --glow-core: transparent; }
+  .bulb__glass { fill: rgb(255 255 255 / 0.04); stroke: #55575c; stroke-width: 2; transition: fill var(--d-4), stroke var(--d-4); }
+  .bulb__filament { fill: none; stroke: #55575c; stroke-width: 2.5; stroke-linejoin: round; transition: stroke var(--d-4); }
+  .bulb__base { fill: #2a2b2e; stroke: #3a3b3f; }
+  .bulb__halo { opacity: 0; transition: opacity var(--d-5) var(--ease-out); }
+  .bulb--on, .bulb--owned { --glow-core: rgb(255 120 50 / 0.75); }
+  .bulb--on .bulb__halo, .bulb--owned .bulb__halo, .bulb--grace .bulb__halo { opacity: 1; }
+  .bulb--on .bulb__glass, .bulb--owned .bulb__glass { fill: rgb(255 150 90 / 0.25); stroke: #ffb38a; }
+  .bulb--on .bulb__filament, .bulb--owned .bulb__filament { stroke: #fff1e6; filter: drop-shadow(0 0 6px var(--c-signal)); }
+  .bulb--grace { --glow-core: rgb(18 179 214 / 0.6); }
+  .bulb--grace .bulb__glass { fill: rgb(18 179 214 / 0.18); stroke: var(--c-aqua-2); }
+  .bulb--grace .bulb__filament { stroke: #dffbff; animation: pulse 2.4s var(--ease-in-out) infinite; }
+  .bulb--owned .bulb__halo { filter: drop-shadow(0 0 12px var(--c-volt)); }
+
+  .vd__relay {
+    position: absolute; right: 7%; bottom: 7%; z-index: 1; width: 3.2rem; height: 2rem;
+    border: 1.5px solid #3a3b3f; border-radius: 4px; display: grid; place-items: center;
+  }
+  .vd__relay-arm { width: 60%; height: 2px; background: var(--c-slate-1); transform-origin: left; rotate: -22deg; transition: rotate var(--d-2) var(--ease-out), background var(--d-2); }
+  .vd__relay.is-on { border-color: var(--c-signal); }
+  .vd__relay.is-on .vd__relay-arm { rotate: 0deg; background: var(--c-signal); }
+
+  .vd__lcd { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--c-line-dark); }
+  .vd__lcd > div { padding: var(--s-3) 0; border-bottom: 1px solid var(--c-line-dark); }
+  .vd__lcd > div:nth-child(odd) { padding-right: var(--s-3); border-right: 1px solid var(--c-line-dark); }
+  .vd__lcd > div:nth-child(even) { padding-left: var(--s-3); }
+  .vd__lcd dt { font-size: var(--fs-micro); text-transform: uppercase; letter-spacing: 0.08em; color: var(--c-slate-2); font-weight: 600; }
+  .vd__lcd dd { font-family: var(--font-mono); font-size: 0.85rem; margin-top: 0.2em; }
+
+  .vd__alert {
+    display: grid; gap: 0.3em; padding: var(--s-4); border-left: 3px solid var(--c-alert);
+    background: rgb(255 46 31 / 0.12); color: #ffd3cf;
+  }
+  .vd__alert strong { color: #ff8a7f; }
+
+  .bits__label { color: var(--c-slate-2); margin-bottom: var(--s-2); }
+  .bits__row { display: grid; grid-template-columns: repeat(auto-fill, minmax(6.2rem, 1fr)); gap: 1px; background: var(--c-line-dark); border: 1px solid var(--c-line-dark); }
+  .bit { background: var(--c-ink); padding: var(--s-2) var(--s-3); display: grid; gap: 0.1em; }
+  .bit__v { font-size: 1.5rem; font-weight: 300; color: var(--c-slate-1); }
+  .bit__n { font-size: 0.7rem; color: var(--c-slate-2); text-transform: lowercase; }
+  .bit.is-on .bit__v { color: var(--c-aqua-1); text-shadow: 0 0 10px rgb(18 179 214 / 0.6); }
+  .bit.is-relay .bit__v { color: var(--c-signal); text-shadow: 0 0 10px rgb(255 74 10 / 0.6); }
+
+  .vd__steps { border-top: 1px solid var(--c-line-dark); }
+  .vstep { display: grid; gap: var(--s-3); padding-block: var(--s-6); border-bottom: 1px solid var(--c-line-dark); transition: opacity var(--d-3); }
+  .vstep.is-locked .vstep__title { color: var(--c-slate-2); }
+  .vstep__no { color: var(--c-signal); }
+  .vstep__title { font-size: clamp(1.75rem, 6vw, 2.75rem); }
+  .vstep__desc { color: var(--c-slate-2); max-width: 44ch; }
+  .vstep__note { color: var(--c-slate-2); font-size: 0.85rem; }
+  .vstep__btns { display: flex; flex-wrap: wrap; gap: var(--s-2); }
+  .vstep .btn { justify-self: start; }
+
+  .vd__foot { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-5) var(--s-6); margin-top: var(--s-8); }
+  .vd__foot .tlink { font-size: var(--fs-label); }
+  .vd__honest { flex-basis: 100%; display: flex; gap: var(--s-2); color: var(--c-slate-2); max-width: 60ch; }
+  .vd__honest .ring { margin-top: 0.2em; }
+}

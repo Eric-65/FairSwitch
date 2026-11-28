@@ -1,0 +1,45 @@
+@layer components {
+  .site-header {
+    position: fixed; inset: 0 0 auto 0; z-index: 50;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: clamp(1rem, 5vw, 2rem) var(--gutter);
+    pointer-events: none;
+  }
+  .site-header > * { pointer-events: auto; }
+  .site-header__mark .wordmark { font-size: clamp(1.75rem, 8vw, 2.5rem); }
+  .site-header__mark { transition: opacity var(--d-3) var(--ease-out); }
+  .site-header__mark.is-hidden { opacity: 0; pointer-events: none; }
+
+  .menu-btn {
+    position: relative; z-index: 60;
+    width: clamp(5rem, 19vw, 7rem); height: 48px;
+    display: grid; align-content: center; gap: 9px;
+  }
+  .menu-btn span {
+    display: block; height: 5px; background: var(--c-signal);
+    transition: transform var(--d-3) var(--ease-in-out);
+  }
+  .menu-btn.is-open span:first-child { transform: translateY(7px) rotate(12deg); }
+  .menu-btn.is-open span:last-child { transform: translateY(-7px) rotate(-12deg); }
+
+  .menu {
+    position: fixed; inset: 0; z-index: 45; background: var(--c-ink); color: var(--c-white);
+    display: flex; flex-direction: column; justify-content: space-between;
+    padding: clamp(6rem, 22vw, 9rem) var(--gutter) var(--s-7);
+    overflow-y: auto;
+  }
+  .menu__rows { border-top: 1px solid var(--c-line-dark); }
+  .menu__row {
+    display: flex; justify-content: space-between; align-items: center; gap: var(--s-4);
+    padding-block: clamp(0.9rem, 3.5vw, 1.4rem);
+    border-bottom: 1px solid var(--c-line-dark);
+    font-size: var(--fs-h2); font-weight: 700; letter-spacing: -0.045em; line-height: 1;
+  }
+  .menu__row .pixel { font-size: 0.5em; transition: translate var(--d-2) var(--ease-out); }
+  .menu__row:hover .pixel, .menu__row:focus-visible .pixel { translate: 0.3em 0; }
+  .menu__row[aria-current='page'] { color: var(--c-signal); }
+  .menu__foot { display: flex; flex-wrap: wrap; gap: var(--s-5); align-items: center; justify-content: space-between; margin-top: var(--s-7); }
+  .menu__note { color: var(--c-slate-2); }
+  html.menu-open { overflow: hidden; }
+  html.menu-open .floating-cta { opacity: 0; pointer-events: none; }
+}

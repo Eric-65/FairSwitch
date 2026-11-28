@@ -1,0 +1,30 @@
+@layer components {
+  .footer { background: var(--c-ink); color: var(--c-white); padding: var(--section-y) 0 calc(var(--s-9) + 2rem); }
+  .footer__rows { border-top: 1px solid var(--c-line-dark); }
+  .footer__row {
+    display: flex; justify-content: space-between; align-items: center; gap: var(--s-4);
+    padding-block: clamp(1rem, 4vw, 1.6rem); border-bottom: 1px solid var(--c-line-dark);
+    font-size: var(--fs-h2); font-weight: 700; letter-spacing: -0.045em; line-height: 1;
+  }
+  .footer__row .pixel { font-size: 0.5em; transition: translate var(--d-2) var(--ease-out); }
+  a.footer__row:hover .pixel, a.footer__row:focus-visible .pixel { translate: 0.3em 0; }
+  .footer__row.is-placeholder { color: var(--c-slate-2); }
+  .footer__row .tag { font-size: 0.75rem; vertical-align: middle; letter-spacing: 0.08em; }
+
+  .footer__contracts {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); gap: var(--s-5) var(--s-6);
+    margin-top: var(--s-8);
+  }
+  .footer__contracts dt { color: var(--c-slate-2); margin-bottom: 0.3em; }
+  .footer__contracts a { text-decoration: underline; text-decoration-color: var(--c-signal); text-underline-offset: 3px; }
+
+  .footer__base { display: flex; justify-content: space-between; align-items: flex-end; gap: var(--s-4); margin-top: var(--s-9); }
+  .footer__mark { font-size: clamp(3rem, 16vw, 12rem); }
+  .footer__top {
+    width: 56px; height: 56px; display: grid; place-items: center; flex: none;
+    border: 1px solid var(--c-line-dark); color: var(--c-signal);
+  }
+  .footer__top .pixel { width: 24px; height: 24px; }
+  .footer__top:hover { background: var(--c-graphite-2); }
+  .footer__legal { margin-top: var(--s-6); color: var(--c-slate-2); max-width: 60ch; font-size: 0.9em; }
+}

@@ -1,0 +1,20 @@
+@layer components {
+  .cx { background: var(--c-ink); color: var(--c-white); padding: clamp(6.5rem, 26vw, 10rem) 0 var(--section-y); min-height: 100svh; }
+  .cx__kicker { font-size: var(--fs-label); font-weight: 500; color: var(--c-slate-2); }
+  .cx__title { font-size: var(--fs-h1); margin: var(--s-3) 0 var(--s-5); }
+  .cx__title .serif { font-weight: 400; }
+  .cx__lede { color: var(--c-slate-2); max-width: 52ch; font-size: var(--fs-label); letter-spacing: -0.02em; line-height: 1.3; }
+  .cx__facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr)); gap: var(--s-4) var(--s-5); margin: var(--s-7) 0; border-top: 1px solid var(--c-line-dark); padding-top: var(--s-5); }
+  .cx__facts dt { color: var(--c-slate-2); margin-bottom: 0.3em; }
+  .cx__facts a { text-decoration: underline; text-decoration-color: var(--c-signal); text-underline-offset: 3px; }
+  .cx__state { margin-bottom: var(--s-5); }
+  .cx__formulas { margin-top: var(--section-y); }
+  .cx__h2 { font-size: var(--fs-h2); display: flex; gap: 0.3em; align-items: center; margin-bottom: var(--s-6); }
+  .cx__h2 .ring { width: 0.6em; height: 0.6em; }
+  .cx__formulas ul { display: grid; gap: var(--s-3); font-family: var(--font-mono); font-size: clamp(0.85rem, 2.6vw, 1.05rem); }
+  .cx__formulas li { padding: var(--s-3) 0; border-bottom: 1px solid var(--c-line-dark); overflow-wrap: anywhere; }
+  .cx__formulas b { color: var(--c-aqua-1); }
+  .cx__formulas b.is-relay { color: var(--c-signal); }
+  .cx__note { margin-top: var(--s-6); color: var(--c-slate-2); max-width: 60ch; }
+  .cx__links { display: flex; flex-wrap: wrap; gap: var(--s-6); margin-top: var(--s-6); font-size: var(--fs-label); }
+}

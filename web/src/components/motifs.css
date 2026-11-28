@@ -1,0 +1,45 @@
+@layer components {
+  .ring {
+    display: inline-block; flex: none;
+    width: var(--ring-size, 1em); height: var(--ring-size, 1em);
+    vertical-align: -0.08em;
+  }
+
+  .crosshairs { position: absolute; inset: 0; pointer-events: none; z-index: 1; }
+  .crosshair { position: absolute; width: 28px; height: 28px; translate: -50% -50%; }
+  .crosshair::before, .crosshair::after {
+    content: ''; position: absolute; background: rgb(255 255 255 / 0.85);
+  }
+  .crosshair::before { left: 50%; top: 0; bottom: 0; width: 1.5px; translate: -50% 0; }
+  .crosshair::after { top: 50%; left: 0; right: 0; height: 1.5px; translate: 0 -50%; }
+
+  .wordmark {
+    font-family: var(--font-sans); font-weight: 800; letter-spacing: -0.06em; line-height: 0.85;
+    color: var(--c-signal); white-space: nowrap; view-transition-name: wordmark;
+  }
+
+  .pixel { width: 1em; height: 1em; flex: none; }
+  .pixel-chevron { color: var(--c-signal); }
+
+  .tlink {
+    position: relative; display: inline-block; text-transform: lowercase;
+    font-weight: 500; padding-bottom: 0.2em;
+  }
+  .tlink::after {
+    content: ''; position: absolute; left: 0; bottom: 0; height: 2px; width: 100%;
+    background: var(--c-signal); transform-origin: left; transform: scaleX(var(--u, 0.35));
+    transition: transform var(--d-2) var(--ease-out);
+  }
+  .tlink:where(:hover, :focus-visible)::after { --u: 1; }
+  .tlink:focus-visible { outline-offset: 4px; }
+
+  .section-label {
+    display: block; width: fit-content; margin-inline: auto; margin-bottom: var(--s-5);
+    font-size: var(--fs-label); font-weight: 500; text-transform: lowercase; letter-spacing: -0.02em;
+    position: relative; padding-bottom: 0.35em; color: inherit;
+  }
+  .section-label::after {
+    content: ''; position: absolute; left: 50%; bottom: 0; width: 2.5em; height: 1px;
+    translate: -50% 0; background: currentColor;
+  }
+}

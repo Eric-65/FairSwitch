@@ -1,0 +1,61 @@
+@layer tokens {
+  @property --fluid-a { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
+  @property --fluid-x { syntax: '<percentage>'; inherits: false; initial-value: 30%; }
+  @property --fluid-y { syntax: '<percentage>'; inherits: false; initial-value: 40%; }
+
+  :root {
+    color-scheme: light;
+    /* colour */
+    --c-signal: #ff4a0a;
+    --c-signal-ink: #b83500;
+    --c-aqua-1: #12b3d6;
+    --c-aqua-2: #2ec9c4;
+    --c-aqua-deep: #0a7fa8;
+    --c-ink: #0b0b0c;
+    --c-graphite-1: #1b1c1e;
+    --c-graphite-2: #2a2b2e;
+    --c-mist: #f3f4f5;
+    --c-fog: #e3e5e7;
+    --c-slate-1: #6e7074;
+    --c-slate-2: #9a9ca0;
+    --c-volt: #e8ff1a;
+    --c-alert: #ff2e1f;
+    --c-white: #fff;
+    --c-line-dark: rgb(255 255 255 / 0.28);
+    --c-line-light: var(--c-fog);
+
+    /* type */
+    --font-sans: 'Inter Tight', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    --font-serif: 'Instrument Serif', 'Iowan Old Style', 'Times New Roman', serif;
+    --font-mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+
+    --fs-wordmark: clamp(5.5rem, 24vw, 22rem);
+    --fs-display-serif: clamp(3.5rem, 15vw, 12rem);
+    --fs-mega: clamp(3rem, 13vw, 10rem);
+    --fs-h1: clamp(2.5rem, 9.5vw, 6.5rem);
+    --fs-h2: clamp(2rem, 7vw, 4.5rem);
+    --fs-lead: clamp(1.5rem, 6.5vw, 3rem);
+    --fs-statement: clamp(1.75rem, 6vw, 3.75rem);
+    --fs-body: clamp(1rem, 0.95rem + 0.3vw, 1.125rem);
+    --fs-label: clamp(1.05rem, 4.6vw, 1.5rem);
+    --fs-micro: 0.75rem;
+    --fs-stat: clamp(3rem, 12vw, 7rem);
+
+    /* space & layout */
+    --gutter: clamp(1rem, 6.5vw, 4rem);
+    --max: 1440px;
+    --section-y: clamp(4rem, 14vw, 10rem);
+    --s-1: 0.25rem; --s-2: 0.5rem; --s-3: 0.75rem; --s-4: 1rem; --s-5: 1.5rem;
+    --s-6: 2rem; --s-7: 3rem; --s-8: 4rem; --s-9: 6rem; --s-10: 8rem;
+
+    /* shape */
+    --r-cta: 1.1rem;
+    --r-pill: 999px;
+    --shadow-cta: 0 10px 40px rgb(0 0 0 / 0.35);
+
+    /* motion */
+    --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
+    --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+    --d-1: 150ms; --d-2: 250ms; --d-3: 400ms; --d-4: 600ms; --d-5: 900ms;
+  }
+}

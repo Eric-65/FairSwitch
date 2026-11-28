@@ -1,0 +1,12 @@
+@layer components {
+  .verify { display: grid; gap: var(--s-4); justify-items: start; }
+  .verify__steps { display: grid; gap: var(--s-2); width: 100%; }
+  .verify__step { display: flex; gap: var(--s-3); align-items: flex-start; font-family: var(--font-mono); font-size: 0.85rem; overflow-wrap: anywhere; }
+  .verify__icon { width: 1.4em; height: 1.4em; flex: none; display: grid; place-items: center; border-radius: 50%; background: var(--c-aqua-deep); color: var(--c-white); font-size: 0.8em; }
+  .verify__step.is-bad .verify__icon { background: var(--c-alert); }
+  .verify__result { display: flex; align-items: center; gap: var(--s-3); font-size: var(--fs-label); font-weight: 600; letter-spacing: -0.02em; }
+  .verify__result svg { width: 2.4em; height: 2.4em; flex: none; }
+  .verify__result.is-ok svg { stroke: var(--c-signal); }
+  .verify__result.is-bad svg { stroke: var(--c-alert); }
+  .verify--dark .btn--ink { background: var(--c-white); color: var(--c-ink); }
+}

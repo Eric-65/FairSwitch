@@ -1,0 +1,18 @@
+@layer components {
+  .numlist { display: grid; gap: clamp(2.5rem, 8vw, 4rem); container-type: inline-size; }
+  .numlist__item { display: grid; gap: var(--s-3); }
+  @container (min-width: 48rem) {
+    .numlist__item { grid-template-columns: 6rem 1fr 1fr; column-gap: var(--s-6); align-items: start; }
+    .numlist__no { grid-row: span 3; padding-top: 0.6em; }
+    .numlist__sub { grid-column: 3; grid-row: 1 / span 2; }
+  }
+  .numlist__no { color: var(--c-signal-ink); }
+  .numlist--dark .numlist__no { color: var(--c-signal); }
+  .numlist__title { font-size: var(--fs-h2); }
+  .numlist__desc { color: var(--c-slate-1); font-size: var(--fs-label); line-height: 1.3; letter-spacing: -0.02em; max-width: 30ch; }
+  .numlist--dark .numlist__desc { color: var(--c-slate-2); }
+  .numlist__sub { border-top: 1px solid var(--c-line-light); }
+  .numlist--dark .numlist__sub { border-color: var(--c-line-dark); }
+  .numlist__sub li { padding-block: 0.7em; border-bottom: 1px solid var(--c-line-light); font-weight: 500; }
+  .numlist--dark .numlist__sub li { border-color: var(--c-line-dark); }
+}

@@ -1,0 +1,23 @@
+@layer components {
+  .toasts {
+    position: fixed; z-index: 70; top: clamp(4.5rem, 16vw, 6rem); right: var(--gutter);
+    display: grid; gap: var(--s-3); width: min(24rem, calc(100% - 2 * var(--gutter)));
+  }
+  .toast {
+    display: flex; gap: var(--s-3); align-items: flex-start;
+    background: rgb(27 28 30 / 0.92); color: var(--c-white);
+    -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+    border-radius: var(--r-cta); padding: var(--s-4); box-shadow: var(--shadow-cta);
+  }
+  .toast .ring { margin-top: 0.2em; }
+  .toast--error { border-left: 3px solid var(--c-alert); }
+  .toast__title { font-weight: 600; }
+  .toast__body { color: var(--c-slate-2); font-size: 0.9em; }
+  .toast__link { color: var(--c-aqua-1); font-size: 0.9em; text-decoration: underline; }
+  .toast__spin {
+    width: 1em; height: 1em; margin-top: 0.2em; flex: none; border-radius: 50%;
+    border: 2px solid var(--c-slate-1); border-top-color: var(--c-signal);
+    animation: spin 0.8s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(1turn); } }
+}
